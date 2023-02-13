@@ -1,0 +1,27 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Likes
+    network: mumbai
+    source:
+      address: "0x7fdf9fce06bdc3ee7702b2051ba21322d8c93326"
+      abi: Likes
+      startBlock: 31983674
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Like
+        - Unlike
+      abis:
+        - name: Likes
+          file: ./abis/Likes.json
+      eventHandlers:
+        - event: Like(indexed string,string,indexed address)
+          handler: handleLike
+        - event: Unlike(indexed string,string,indexed address)
+          handler: handleUnlike
+      file: ./src/likes.ts

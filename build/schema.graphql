@@ -1,0 +1,12 @@
+type Table @entity {
+  id: Bytes!
+  fullTableName: String!
+  likes: [Like!] @derivedFrom(field: "tableName")
+}
+
+type Like @entity {
+  id: Bytes!
+  tableName: Table!
+  address: String!
+  timestamp: BigInt!
+}
